@@ -15,12 +15,19 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Mobile-optimized variants for field workers
+        mobile: "bg-gradient-primary text-primary-foreground hover:opacity-90 shadow-mobile font-semibold text-lg py-6 px-8 rounded-mobile",
+        capture: "bg-gradient-primary text-primary-foreground hover:opacity-90 shadow-mobile font-bold text-xl py-8 px-12 rounded-mobile min-h-[80px] transform hover:scale-105 transition-all duration-300",
+        success: "bg-gradient-success text-success-foreground hover:opacity-90 shadow-success font-semibold",
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        // Mobile-optimized sizes
+        mobile: "h-12 px-6 text-base",
+        capture: "h-20 px-8 text-xl",
       },
     },
     defaultVariants: {
