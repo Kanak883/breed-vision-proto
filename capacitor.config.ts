@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.3761ca6e90384712ac52d6db2a40673f',
+  appId: 'com.breedvision.app',
   appName: 'BreedVision Prototype',
   webDir: 'dist',
   server: {
