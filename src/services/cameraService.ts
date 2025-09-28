@@ -1,15 +1,46 @@
 export const captureImage = async (): Promise<string | null> => {
   try {
-    // For web demo - return a placeholder image
-    if (typeof window !== 'undefined') {
-      return generatePlaceholderImage();
-    }
-    
-    return null;
+    // Try to access camera/photo library via file input for web
+    return await openImagePicker();
   } catch (error) {
     console.error('Error capturing image:', error);
-    return null;
+    
+    // Fallback to placeholder for demo purposes
+    return generatePlaceholderImage();
   }
+};
+
+// Web-based image picker using HTML5 File API
+const openImagePicker = (): Promise<string | null> => {
+  return new Promise((resolve) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment'; // This will open camera on mobile browsers
+    
+    input.onchange = (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          resolve(e.target?.result as string);
+        };
+        reader.onerror = () => {
+          resolve(null);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        resolve(null);
+      }
+    };
+    
+    input.oncancel = () => {
+      resolve(null);
+    };
+    
+    // Trigger the file picker
+    input.click();
+  });
 };
 
 // Generate a placeholder image for web demo
