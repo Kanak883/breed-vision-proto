@@ -1,38 +1,14 @@
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-
 export const captureImage = async (): Promise<string | null> => {
   try {
-    const image = await Camera.getPhoto({
-      quality: 80,
-      allowEditing: false,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Camera,
-    });
-
-    return image.dataUrl || null;
+    // For web demo - return a placeholder image
+    if (typeof window !== 'undefined') {
+      return generatePlaceholderImage();
+    }
+    
+    return null;
   } catch (error) {
     console.error('Error capturing image:', error);
-    
-    // Fallback to gallery if camera fails
-    try {
-      const image = await Camera.getPhoto({
-        quality: 80,
-        allowEditing: false,
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Photos,
-      });
-
-      return image.dataUrl || null;
-    } catch (galleryError) {
-      console.error('Error accessing gallery:', galleryError);
-      
-      // For web demo - return a placeholder image
-      if (typeof window !== 'undefined') {
-        return generatePlaceholderImage();
-      }
-      
-      return null;
-    }
+    return null;
   }
 };
 
